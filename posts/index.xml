@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Youngjoon Lee</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on Youngjoon Lee</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 08 Jun 2020 17:26:38 +0900</lastBuildDate>
+    
+	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hello</title>
+      <link>/posts/hello/</link>
+      <pubDate>Mon, 08 Jun 2020 17:26:38 +0900</pubDate>
+      
+      <guid>/posts/hello/</guid>
+      <description>World!</description>
+    </item>
+    
+  </channel>
+</rss>
