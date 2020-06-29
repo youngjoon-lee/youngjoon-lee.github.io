@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Youngjoon Lee</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 11 Jun 2020 11:40:26 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jun 2020 14:53:42 +0900</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>HyperLogLog</title>
+      <link>/posts/hyperloglog/</link>
+      <pubDate>Sun, 28 Jun 2020 14:53:42 +0900</pubDate>
+      
+      <guid>/posts/hyperloglog/</guid>
+      <description>Given a stream of strings, let&amp;rsquo;s think how to count the number of distinct strings (Cardinality).
+Using in-memory data structure The simplest way might be using a in-memory data structure, such as HashSet. Whenever we read a string from the stream, we can add it to the HashSet. Finally, we can return the final size of HashSet.
+But, this way needs O(n) of memory at most, if n is the number of strings in the stream.</description>
+    </item>
     
     <item>
       <title>My first open source contribution was just released.</title>
