@@ -79,7 +79,9 @@ bucket[bucket_no] <span style="color:#f92672">=</span> max(bucket[bucket_no], nu
 <li>For HyperLogLog, use the harmonic mean instead of the geometric mean, which edging down the error to slightly less than <code>1.04 * sqrt(m)</code> with no increase in required storages.</li>
 </ol>
 <pre><code>CARDINALITY = constant * m * m / (2^(-R1) + ... + 2^(-Rm))
-</code></pre>
+</code></pre><h2 id="references">References</h2>
+<p><a href="https://engineering.fb.com/data-infrastructure/hyperloglog/">https://engineering.fb.com/data-infrastructure/hyperloglog/</a></p>
+
 			</div>
 		</article>
 	</main>
