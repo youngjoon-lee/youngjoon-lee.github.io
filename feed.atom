@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-us">
+  <title>Youngjoon Lee</title>
+  <subtitle></subtitle>
+  <id>https://axiom-example.netlify.app/</id>
+  <author>
+    <name>Youngjoon Lee</name>
+    <uri>https://axiom-example.netlify.app/</uri>
+  </author>
+  <icon>https://axiom-example.netlify.app/image/brand/icon-1-1.png</icon>
+  <logo>https://axiom-example.netlify.app/image/brand/icon-2-1.png</logo>
+  <updated>2020-07-09T13:03:20Z</updated>
+  <link rel="self" type="application/atom+xml" href="https://axiom-example.netlify.app/feed.atom" hreflang="en-us"/>
+  <link rel="alternate" type="text/html" href="https://axiom-example.netlify.app/" hreflang="en-us"/>
+  <entry>
+    <title>Thought about Storage on Kubernetes</title>
+    <author>
+      <name>Youngjoon Lee</name>
+      <uri>https://youngjoon-lee.github.com</uri>
+    </author>
+    <id>https://axiom-example.netlify.app/thought_about_storage_on_k8s/</id>
+    <updated>2020-07-06T07:57:28Z</updated>
+    <published>2020-07-06T07:57:28Z</published>
+    <content type="html"><![CDATA[<p>Kubernetes is revolutionizing the way applications are being developed and deployed.
+Now, developers can focus on implementing the application itself without worrying about
+the underlying infrastructure and some of distributed system concepts.</p>
+<p>However, Kubernetes doesn't support storing state, even though most of applications are stateful.</p>
+<p>On Kubernetes, containers can being created and destroyed. They are dynamic.
+But, persistent storages cannot be dynamic as normal Pods.</p>
+<p>Many SW teams have been using distributed storage solutions provided by cloud providers, such as
+AWS or GCP. It makes developers deploy their containers to another cloud provider or any other environments.</p>
+<p>I was curious which the cloud-native storage solutions have being discussed.</p>
+<h3 id="native-kubernetes--storage">Native Kubernetes &amp; Storage</h3>
+<p>On Kubernetes, we can use PV and PVC. In static provisioning, admin should define PVCs in advance,
+so that storages can be mounted to a particular node before executing Pods.
+It doesn't meet the philosophy of Kubernetes that allocates resources (CPU/Mem) dynamically.</p>
+<p>In dynamic provisioning by Storage Class, we can create multiple profiles of storage, just like templates.
+When a developer makes a PVC, one of these templates is created at the time of the request, and attached to the Pod.
+But, honestly, I don't understand yet how it works.</p>
+<h3 id="csi-container-storage-interface">CSI (Container Storage Interface)</h3>
+<p>CSI was created by CNCF Storage Working Group. It defines a standard container storage interface which can enable
+storage drivers to work on any container orchestrator.</p>
+<p>CSI spec have already been included into Kubernetes. There are already many driver plugins.
+Developers can access storage exposed by CSI-compatible volume driver.</p>
+<p>With CSI, storage can be treated as another workload to be containerized and deployed on a Kubernetes cluster.</p>
+<h3 id="open-source-projects">Open-source Projects</h3>
+<p>Ceph is one of popular distributed storages. Ceph has been adapted into the cloud-native environment.
+There are many ways you can deploy a Ceph cluster, such as with Ansible.
+Using CSI and PVCs, we can deploy a Ceph cluster and have an interface into it from Kubernetes cluster.</p>
+<p>Also, Rook is an open-source project that converge Kubernetes and Ceph.
+Rook is a cloud-native orchestrator which extends Kubernetes.
+It allows putting Ceph into containers, and provides cluster management logic for running Ceph on Kubernetes.
+It automates deployment, bootstrapping, configuration, scaling and rebalancing.</p>
+<p>Rook doesn't have its own persistent state. It's truly built according to the principle of Kubernetes.</p>
+<h3 id="next">Next</h3>
+<p>Let's see how Rook deals with Ceph on Kubernetes, and how it will deal with other distributed storages.</p>
+<p>As a developer of distributed storages, is Rook the best option for deploying storages on Kubernetes?</p>]]></content>
+  </entry>
+  <entry>
+    <title>HyperLogLog</title>
+    <author>
+      <name>Youngjoon Lee</name>
+      <uri>https://youngjoon-lee.github.com</uri>
+    </author>
+    <id>https://axiom-example.netlify.app/hyperloglog/</id>
+    <updated>2020-06-28T05:53:42Z</updated>
+    <published>2020-06-28T05:53:42Z</published>
+    <content type="html"><![CDATA[<p>Given a stream of strings, let's think how to count the number of distinct strings (Cardinality).</p>
+<h2 id="using-in-memory-data-structure">Using in-memory data structure</h2>
+<p>The simplest way might be using a in-memory data structure, such as HashSet. Whenever we read a string from the stream, we can add it to the HashSet. Finally, we can return the final size of HashSet.</p>
+<p>But, this way needs <code>O(n)</code> of memory at most, if <code>n</code> is the number of strings in the stream. We need a smarter way. It might be so hard to implement a fast algorithm which count the exact number of distinct strings. Let's think about the probabilistic counting.</p>
+<h2 id="probabilistic-counting">Probabilistic counting</h2>
+<p>Let's use a hash function. Then, we can convert strings into randomly distributed numbers in a certain range. And, let's take a look at the least significant <code>k</code> bits in the numbers (hash values). The figure below illustrates an example of the probability of observing a sequence of three consecutive <code>0</code>s (<code>k = 3</code>).</p>
+<pre><code>            ....... 0 0 0 ---&gt; prob = 1/(2^3) = 1/8
+            ....... 0 0 1
+            ....... 0 1 0
+ hash(x) -&gt; ....... 0 1 1
+            ....... 1 0 0
+            ....... 1 0 1
+            ....... 1 1 0
+            ....... 1 1 1
+</code></pre><p><strong>In other words, on average, a sequence of <code>k</code> consecutive <code>0</code>s will occur once in every <code>2^k</code> distinct entries.</strong> To estimate the number of distinct elements using this pattern, all we need to do is just record the length of the longest sequence of consecutive <code>0</code>s. Mathematically, if we denote <code>p(x)</code> as the number of consecutive <code>0</code>s in <code>hash(x)</code>, the cardinality of the set <code>{x1, x2, ..., xm}</code> is <code>2^R</code>, where <code>R = max(p(x1), p(x2), ..., p(xm))</code></p>
+<p>But, there are two disadvantages:</p>
+<ol>
+<li>The estimate is too sparse. The <code>2^R</code> can only be one of <code>{1, 2, 4, 8, 16, ..., 1024, 2048, ...}</code>.</li>
+<li>The estimator has high variability. Because it's recoding the maximum <code>p(x)</code>, it requires only one entry whose hash value has too many consecutive <code>0</code>s to produce a drastically inaccurate (overestimated) estimate of cardinality.</li>
+</ol>
+<p>On the plus side, the estimator has a very small memory footprint. We only need a memory space to record the maximum number of consecutive <code>0</code>s.</p>
+<h2 id="improving-accuracy-loglog">Improving accuracy: LogLog</h2>
+<p>We can use many estimators instead of one, and average the results, in order to improve accuracy. It means we can use <code>m</code> independent hash functions: <code>{h1(x), h2(x), ..., hm(x)}</code>. Then, <code>2^R = 2 ^ (1/m * (R1+...+Rm))</code>, where the corresponding maximum number of consecutive <code>0</code>s for each one: <code>R1, ..., Rm</code>.</p>
+<p>However, this requires a lot of computations for <code>m</code> hash values for each input string. The workaround proposed by <a href="http://www.ic.unicamp.br/~celio/peer2peer/math/bitmap-algorithms/durand03loglog.pdf">Durand and Flajolet</a> is to use a single hash function, but use part of its output to split values into one of many buckets.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">h</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">bucket_no</span> <span class="o">=</span> <span class="n">k_msb</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>   <span class="c1"># Most Significant k-Bits</span>
+<span class="n">num_zeros</span> <span class="o">=</span> <span class="n">count_zeros_from_right</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+
+<span class="n">bucket</span><span class="p">[</span><span class="n">bucket_no</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">bucket</span><span class="p">[</span><span class="n">bucket_no</span><span class="p">],</span> <span class="n">num_zeros</span><span class="p">)</span>
+</code></pre></div><p>By having <code>m</code> buckets, we are bascially simulating a situation in which we had <code>m</code> different hash functions. Finally, the formula below is used to get an estimate on the count of distinct values using the <code>m</code> bucket values: <code>{R1, R2, ..., Rm}</code>.</p>
+<pre><code>CARDINALITY = constant * m * 2 ^ (1/m * (R1+...+Rm))
+</code></pre><p>Durand-Flajolet derived the <code>constant = 0.79402</code>. For <code>m</code> buckets, this reduces the standard error to about <code>1.3 * sqrt(m)</code>. Thus, with 2048 buckets where each bucket is 5 bits (which can record a maximum of 32 consecutive <code>0</code>s), we can expect an average error of about 2.8%; 5 bits per bucket is enough to estimate cardinalities up to <code>2 ^ 27</code> per the original paper and required only <code>2048 * 5 = 1.2 KB</code> of memory.</p>
+<h2 id="improving-accuracy-even-further-hyperloglog">Improving accuracy even further: HyperLogLog</h2>
+<ol>
+<li>Durand-Flajolet observed that outliers greatly decreases the accuracy. Thus, we can throw out the largest values before averaging. Specifically, when collecting the bucket values, accuracy can be improved from <code>1.3 * sqrt(m)</code> to only <code>1.05 * sqrt(m)</code> by only retaining the 70% smallest values and discarding the rest for averaging (aka. <code>SuperLogLog</code>).</li>
+<li>For HyperLogLog, use the harmonic mean instead of the geometric mean, which edging down the error to slightly less than <code>1.04 * sqrt(m)</code> with no increase in required storages.</li>
+</ol>
+<pre><code>CARDINALITY = constant * m * m / (2^(-R1) + ... + 2^(-Rm))
+</code></pre><h2 id="references">References</h2>
+<p>https://engineering.fb.com/data-infrastructure/hyperloglog/</p>]]></content>
+  </entry>
+  <entry>
+    <title>My first open source contribution was just released.</title>
+    <author>
+      <name>Youngjoon Lee</name>
+      <uri>https://youngjoon-lee.github.com</uri>
+    </author>
+    <id>https://axiom-example.netlify.app/argo-release/</id>
+    <updated>2020-06-11T02:40:26Z</updated>
+    <published>2020-06-11T02:40:26Z</published>
+    <content type="html"><![CDATA[<p>My first open source <a href="https://github.com/argoproj/argo/pull/3014">contribution</a> (bugfix) to Argo.
+It was just released as <a href="https://github.com/argoproj/argo/releases/tag/v2.9.0-rc1">v2.9.0-rc1</a>.
+<img src="/argo-release.png" alt=""></p>]]></content>
+  </entry>
+  <entry>
+    <title>4-month Working From Home in Germany and Korea</title>
+    <author>
+      <name>Youngjoon Lee</name>
+      <uri>https://youngjoon-lee.github.com</uri>
+    </author>
+    <id>https://axiom-example.netlify.app/4-month-work-from-home/</id>
+    <updated>2020-06-08T12:38:00Z</updated>
+    <published>2020-06-08T12:38:00Z</published>
+    <content type="html"><![CDATA[<p>Due to the pandemic, I had worked from home in Berlin, Germany since February 2020.
+Honestly, I love to work from home and I feel I can concentrate better at home, rather than the office.
+However, it was full of solitude to stay at home alone for 2 months without meeting anyone.
+That's why I decided to come back to Korea and stay here until everything is back to normal.</p>
+<p>It was also a challenge to work remotely from Korea with colleage in Berlin.
+Because I knew our company is not ready to work asynchronously, I decided to
+work with them in the same timezone, from 16:00 to 01:00 in Korean Standard Time.
+Fortunately, it was not a big deal because I'm a night guy.</p>
+<p>In fact, it was a great advantage for me to live with my wife. It makes me
+stable to have lunch and dinner with her everyday. It also makes me concentrate
+on my work, even though she takes a rest when I work (She works from 10 to 19 in KST).</p>
+<p>While working from home for 4 months, I've found two important issues. The one is
+about the work-pattern in our company, and the other is about the time management in my life.</p>
+<p>First, regardless of the sync or async way, I've found there are so many lacks of
+documentation. Not only developement repositories, but also architecture review boards and
+discussion histories. Even if we work synchronously, we aren't able to co-work by looking
+at the same monitor at the same desk. Unless we turn on video calls all day,
+the chance of communication will definitely be decreased. We should fill this gap with
+heavy/efficient documentations. That's what I still have to learn and what I'm willing to do.</p>
+<p>The other observation is about my daytime management. I have worked at daytime, and have taken a rest at the evening and night.
+But, I switched my life pattern. I work from 16 to 01. It means I have to go to bed right after finishing my work, which is not easy.
+If I go to bed a little late, I will get up late and I will have only 5-6 hours before starting work.
+5-6 hours are not bad, but I felt the time flies so fast, compared to the free time at evening/night.
+So, I am trying to go to bed as early as possible and wake up earlier for workouts, cooking and studying.
+Fortunately, it have worked well so far, and I'm planning to continue/improve this remote work pattern.</p>
+<p>I'm just starting this new pattern, and it might have some downsides.
+But, I believe it has huge advantages, such as time management, concentration and
+effective work/artifact management, in conclusion.</p>
+<p>We already have everything to work globally without the limit of geography.</p>]]></content>
+  </entry>
+</feed>

@@ -1,43 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/posts/</loc>
-    <lastmod>2020-07-06T16:57:28+09:00</lastmod>
+    <loc>https://axiom-example.netlify.app/posts/</loc>
+    <lastmod>2020-07-06T07:57:28Z</lastmod>
   </url>
-  
   <url>
-    <loc>/posts/thought_about_storage_on_k8s/</loc>
-    <lastmod>2020-07-06T16:57:28+09:00</lastmod>
+    <loc>https://axiom-example.netlify.app/thought_about_storage_on_k8s/</loc>
+    <lastmod>2020-07-06T07:57:28Z</lastmod>
   </url>
-  
   <url>
-    <loc>/</loc>
-    <lastmod>2020-07-06T16:57:28+09:00</lastmod>
+    <loc>https://axiom-example.netlify.app/</loc>
+    <lastmod>2020-07-06T07:57:28Z</lastmod>
   </url>
-  
   <url>
-    <loc>/posts/hyperloglog/</loc>
-    <lastmod>2020-06-28T14:53:42+09:00</lastmod>
+    <loc>https://axiom-example.netlify.app/hyperloglog/</loc>
+    <lastmod>2020-06-28T05:53:42Z</lastmod>
   </url>
-  
   <url>
-    <loc>/posts/argo-release/</loc>
-    <lastmod>2020-06-11T11:40:26+09:00</lastmod>
+    <loc>https://axiom-example.netlify.app/argo-release/</loc>
+    <lastmod>2020-06-11T02:40:26Z</lastmod>
   </url>
-  
   <url>
-    <loc>/posts/4-month-work-from-home/</loc>
-    <lastmod>2020-06-08T21:38:00+09:00</lastmod>
+    <loc>https://axiom-example.netlify.app/4-month-work-from-home/</loc>
+    <lastmod>2020-06-08T12:38:00Z</lastmod>
   </url>
-  
   <url>
-    <loc>/categories/</loc>
+    <loc>https://axiom-example.netlify.app/categories/</loc>
   </url>
-  
   <url>
-    <loc>/tags/</loc>
+    <loc>https://axiom-example.netlify.app/tags/</loc>
   </url>
-  
 </urlset>
