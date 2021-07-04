@@ -3,16 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name="hugo-theme" content="Axiom 0.6.9">
+<meta name="hugo-theme" content="Axiom 0.8.0">
+
 
 
   <link rel="icon" type="image/png" sizes="32x32" href="/image/brand/favicon.png">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/image/brand/icon-1-1.png">
   <link rel="canonical" href="https://axiom-example.netlify.app/thought_about_storage_on_k8s/">
-<link rel="preload" as="style" href="/bundle.css?v=1594299915" media="all">
-<link rel="stylesheet" href="/bundle.css?v=1594299915" media="all">
-<style>.cdata pre{color:#edf2f7;background-color:#2d3748}.cdata :not(pre)>code{color:#805ad5;background-color:#f7fafc}.chroma .err{color:#fed7d7;background-color:#9b2c2c}.chroma .hl{background-color:#4a5568}.chroma .ln{color:#a0aec0}.chroma .k,.chroma .kc,.chroma .kd,.chroma .kn,.chroma .kp,.chroma .kr{color:#63b3ed}.chroma .kt{color:#b794f4}.chroma .na{color:#f6e05e}.chroma .nb{color:#f6ad55}.chroma .nc{color:#fc8181}.chroma .no{color:#68d391}.chroma .nd{color:#fc8181}.chroma .ne{color:#fc8181}.chroma .nf{color:#f6ad55}.chroma .nt{color:#fc8181}.chroma .l{color:#b794f4}.chroma .dl,.chroma .ld,.chroma .s,.chroma .s2,.chroma .sa,.chroma .sb,.chroma .sc,.chroma .sd{color:#68d391}.chroma .se{color:#a0aec0}.chroma .s1,.chroma .sh,.chroma .si,.chroma .sr,.chroma .ss,.chroma .sx{color:#68d391}.chroma .il,.chroma .m,.chroma .mb,.chroma .mf,.chroma .mh,.chroma .mi,.chroma .mo{color:#b794f4}.chroma .o,.chroma .ow{color:#90cdf4}.chroma .p{color:#cbd5e0}.chroma .c,.chroma .c1,.chroma .ch,.chroma .cm,.chroma .cp,.chroma .cpf,.chroma .cs{color:#a0aec0}.chroma .ge{font-style:italic}.chroma .gs{font-weight:700}</style>
+<link rel="preload" as="style" href="/bundle.css?v=1625364992" media="all">
+<link rel="stylesheet" href="/bundle.css?v=1625364992" media="all">
+<style>.cdata pre{background-color:#1f2937;color:#e5e7eb}.cdata :not(pre)>code{background-color:#f3f4f6;color:#7c3aed}.chroma .err{background-color:#991b1b;color:#fecaca}.chroma .hl{background-color:#374151}.chroma .ln{color:#9ca3af}.chroma .k,.chroma .kc,.chroma .kd,.chroma .kn,.chroma .kp,.chroma .kr{color:#60a5fa}.chroma .kt{color:#a78bfa}.chroma .na,.chroma .nb{color:#fbbf24}.chroma .nc{color:#f87171}.chroma .no{color:#34d399}.chroma .nd{color:#f87171}.chroma .ne{color:#f87171}.chroma .nf{color:#fbbf24}.chroma .nt{color:#f87171}.chroma .l{color:#a78bfa}.chroma .dl,.chroma .ld,.chroma .s,.chroma .s2,.chroma .sa,.chroma .sb,.chroma .sc,.chroma .sd{color:#34d399}.chroma .se{color:#9ca3af}.chroma .s1,.chroma .sh,.chroma .si,.chroma .sr,.chroma .ss,.chroma .sx{color:#34d399}.chroma .il,.chroma .m,.chroma .mb,.chroma .mf,.chroma .mh,.chroma .mi,.chroma .mo{color:#a78bfa}.chroma .o,.chroma .ow{color:#93c5fd}.chroma .c,.chroma .c1,.chroma .ch,.chroma .cm,.chroma .cp,.chroma .cpf,.chroma .cs,.chroma .p{color:#9ca3af}.chroma .ge{font-style:italic}.chroma .gs{font-weight:700}
+</style>
 
 
 
@@ -66,21 +68,12 @@
 }
 </script>
 
-<link rel="preload" as="script" href="/bundle.js?v=1594299915">
-<link rel="preconnect" href="https://www.google-analytics.com">
-<link rel="preconnect" href="https://stats.g.doubleclick.net">
-<link rel="preconnect" href="https://www.googleadservices.com">
-<link rel="preload" as="script" href="https://www.googletagmanager.com/gtag/js?id=UA-144368893-2">
-<script src="https://www.googletagmanager.com/gtag/js?id=UA-144368893-2"></script>
-<script>
-  window.dataLayer=window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js',new Date());
-  gtag('config','UA-144368893-2');
-</script>
+<link rel="preload" as="script" href="/bundle.js?v=1625364992">
+
 
 </head>
 <body>
+
   <header id="nav" class="header">
   <div class="ax-l-i max-w-6xl">
     <div class="ax-logo">
@@ -111,7 +104,7 @@
           <div class="flex items-center">
   <div class="flex-shrink-0">
     <img
-    class="w-12 h-12 sm:w-14 sm:h-14 object-cover p-05 rounded-full border border-blue-300"
+    class="w-12 h-12 sm:w-14 sm:h-14 object-cover p-3px rounded-full border border-blue-300"
     src="/image/author/my.jpeg"
     alt="Youngjoon Lee">
   </div>
@@ -124,12 +117,11 @@
         </div>
         <div>
           <div class="flex items-center">
-  <a class="flex-shrink-0 block text-raven-800 hover:text-raven-900" target="_blank" rel="noopener nofollow" title="Share on Twitter" href="https://twitter.com/intent/tweet?text=Thought%20about%20Storage%20on%20Kubernetes%20by%20%40%20https%3a%2f%2faxiom-example.netlify.app%2fthought_about_storage_on_k8s%2f"><svg class="w-6 h-6 fill-current" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M32 6.078c-1.2.522-2.458.868-3.78 1.036 1.36-.812 2.398-2.088 2.886-3.626a13.11 13.11 0 0 1-4.16 1.588C25.742 3.794 24.026 3 22.154 3a6.56 6.56 0 0 0-6.556 6.562c0 .52.044 1.02.152 1.496-5.454-.266-10.28-2.88-13.522-6.862-.566.982-.898 2.106-.898 3.316a6.57 6.57 0 0 0 2.914 5.452 6.48 6.48 0 0 1-2.964-.808v.072c0 3.188 2.274 5.836 5.256 6.446-.534.146-1.116.216-1.72.216-.42 0-.844-.024-1.242-.112.85 2.598 3.262 4.508 6.13 4.57a13.18 13.18 0 0 1-8.134 2.798c-.538 0-1.054-.024-1.57-.1C2.906 27.93 6.35 29 10.064 29c12.072 0 18.672-10 18.672-18.668 0-.3-.01-.57-.024-.848C30.014 8.56 31.108 7.406 32 6.078z"/></svg>
+    <a class="flex-shrink-0 block text-raven-800 hover:text-raven-900" target="_blank" rel="noopener nofollow" title="Share on Twitter" href="https://twitter.com/intent/tweet?text=Thought%20about%20Storage%20on%20Kubernetes%20by%20%40%20https%3a%2f%2faxiom-example.netlify.app%2fthought_about_storage_on_k8s%2f"><svg class="w-6 h-6 fill-current" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M32 6.078c-1.2.522-2.458.868-3.78 1.036 1.36-.812 2.398-2.088 2.886-3.626a13.11 13.11 0 0 1-4.16 1.588C25.742 3.794 24.026 3 22.154 3a6.56 6.56 0 0 0-6.556 6.562c0 .52.044 1.02.152 1.496-5.454-.266-10.28-2.88-13.522-6.862-.566.982-.898 2.106-.898 3.316a6.57 6.57 0 0 0 2.914 5.452 6.48 6.48 0 0 1-2.964-.808v.072c0 3.188 2.274 5.836 5.256 6.446-.534.146-1.116.216-1.72.216-.42 0-.844-.024-1.242-.112.85 2.598 3.262 4.508 6.13 4.57a13.18 13.18 0 0 1-8.134 2.798c-.538 0-1.054-.024-1.57-.1C2.906 27.93 6.35 29 10.064 29c12.072 0 18.672-10 18.672-18.668 0-.3-.01-.57-.024-.848C30.014 8.56 31.108 7.406 32 6.078z"/></svg>
 </a>
-  <a class="ml-3 flex-shrink-0 block text-raven-800 hover:text-raven-900" target="_blank" rel="noopener nofollow" title="Share on Facebook" href="https://www.facebook.com/dialog/share?app_id=&display=page&href=https%3a%2f%2faxiom-example.netlify.app%2fthought_about_storage_on_k8s%2f"><svg class="w-6 h-6 fill-current" viewBox="-7 -3.5 39 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M30.234 0H1.765C.8.001 0 .79 0 1.766v28.47C.001 31.2.79 32 1.766 32h15.328V19.625h-4.156V14.78h4.156v-3.564c0-4.134 2.523-6.384 6.21-6.384 1.766 0 3.284.13 3.726.2v4.32h-2.543c-2.006 0-2.394.953-2.394 2.352v3.085h4.797l-.625 4.844h-4.172V32h8.14C31.21 32 32 31.2 32 30.234V1.765C32 .8 31.21 0 30.234 0z"/></svg>
+    <a class="ml-3 flex-shrink-0 block text-raven-800 hover:text-raven-900" target="_blank" rel="noopener nofollow" title="Share on Facebook" href="https://www.facebook.com/dialog/share?app_id=&display=page&href=https%3a%2f%2faxiom-example.netlify.app%2fthought_about_storage_on_k8s%2f"><svg class="w-6 h-6 fill-current" viewBox="-7 -3.5 39 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M30.234 0H1.765C.8.001 0 .79 0 1.766v28.47C.001 31.2.79 32 1.766 32h15.328V19.625h-4.156V14.78h4.156v-3.564c0-4.134 2.523-6.384 6.21-6.384 1.766 0 3.284.13 3.726.2v4.32h-2.543c-2.006 0-2.394.953-2.394 2.352v3.085h4.797l-.625 4.844h-4.172V32h8.14C31.21 32 32 31.2 32 30.234V1.765C32 .8 31.21 0 30.234 0z"/></svg>
 </a>
 </div>
-
         </div>
       </div>
     </div>
@@ -190,19 +182,21 @@ It automates deployment, bootstrapping, configuration, scaling and rebalancing.<
       <a class="ml-3 first:ml-0 text-sm text-gray-600 hover:text-gray-800" href="/privacy/">Privacy</a>
     </nav>
     <div class="footer-social flex items-center justify-center mt-4">
-      <a class="block mx-3 w-6 h-6 text-raven-700 hover:text-raven-900" target="_blank" rel="noopener nofollow" title="Github" href="https://github.com/youngjoon-lee"><svg class="fill-current" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M15.998 0C7.164 0 0 7.35 0 16.417 0 23.67 4.584 29.82 10.944 31.994c.8.15 1.092-.356 1.092-.79l-.022-2.792c-4.45.99-5.4-2.202-5.4-2.202-.726-1.896-1.776-2.4-1.776-2.4-1.454-1.018.108-.998.108-.998 1.606.117 2.45 1.693 2.45 1.693 1.428 2.507 3.746 1.784 4.658 1.363.144-1.06.558-1.784 1.016-2.195-3.552-.415-7.288-1.823-7.288-8.113 0-1.792.624-3.258 1.648-4.406-.166-.415-.714-2.085.156-4.344 0 0 1.344-.44 4.4 1.683 1.276-.364 2.644-.546 4.006-.552a14.98 14.98 0 0 1 4.006.554C23.062 6.37 24.404 6.8 24.404 6.8c.872 2.26.324 3.93.16 4.344 1.026 1.148 1.644 2.614 1.644 4.406 0 6.306-3.74 7.694-7.304 8.1.574.507 1.086 1.51 1.086 3.04l-.02 4.503c0 .44.288.95 1.1.788C27.42 29.817 32 23.667 32 16.417 32 7.35 24.836 0 15.998 0z"/></svg></a>
+      <a class="block mx-3 w-6 h-6 text-raven-700 hover:text-raven-900" target="_blank" rel="noopener nofollow" title="GitHub" href="https://github.com/youngjoon-lee"><svg class="fill-current" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M15.998 0C7.164 0 0 7.35 0 16.417 0 23.67 4.584 29.82 10.944 31.994c.8.15 1.092-.356 1.092-.79l-.022-2.792c-4.45.99-5.4-2.202-5.4-2.202-.726-1.896-1.776-2.4-1.776-2.4-1.454-1.018.108-.998.108-.998 1.606.117 2.45 1.693 2.45 1.693 1.428 2.507 3.746 1.784 4.658 1.363.144-1.06.558-1.784 1.016-2.195-3.552-.415-7.288-1.823-7.288-8.113 0-1.792.624-3.258 1.648-4.406-.166-.415-.714-2.085.156-4.344 0 0 1.344-.44 4.4 1.683 1.276-.364 2.644-.546 4.006-.552a14.98 14.98 0 0 1 4.006.554C23.062 6.37 24.404 6.8 24.404 6.8c.872 2.26.324 3.93.16 4.344 1.026 1.148 1.644 2.614 1.644 4.406 0 6.306-3.74 7.694-7.304 8.1.574.507 1.086 1.51 1.086 3.04l-.02 4.503c0 .44.288.95 1.1.788C27.42 29.817 32 23.667 32 16.417 32 7.35 24.836 0 15.998 0z"/></svg></a>
       <a class="block mx-3 w-6 h-6 text-raven-700 hover:text-raven-900" target="_blank" rel="noopener nofollow" title="LinkedIn" href="https://www.linkedin.com/in/youngjoon-lee-11ba7b72/"><svg class="fill-current" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M29.692 0H2.308A2.31 2.31 0 0 0 0 2.308v27.384A2.31 2.31 0 0 0 2.308 32h27.384A2.31 2.31 0 0 0 32 29.692V2.308A2.31 2.31 0 0 0 29.692 0zM11.35 24.188H7.454V12.464h3.897v11.723zM9.402 10.863h-.025c-1.308 0-2.153-.9-2.153-2.025 0-1.15.872-2.026 2.205-2.026s2.153.875 2.18 2.026c0 1.125-.846 2.025-2.205 2.025zm16 13.324h-3.896v-6.272c0-1.576-.564-2.65-1.974-2.65-1.076 0-1.717.725-2 1.425-.103.25-.128.6-.128.95v6.547h-3.896V12.464h3.896v1.66c.518-.8 1.444-1.935 3.512-1.935 2.564 0 4.486 1.676 4.486 5.276v6.722z"/></svg></a>
     </div>
 
-    <div class="footer-copyright text-sm text-center text-gray-500 mt-4">
-      &#169; 2020-2020 Youngjoon Lee
+    <div class="footer-copyright text-sm text-center text-gray-400 mt-4">
+      &#169; 2020-2021 Youngjoon Lee
     </div>
-    <div class="text-sm sm:text-xs text-center text-gray-500 mt-2">
+    <div class="text-sm sm:text-xs text-center text-gray-400 mt-2">
       Powered by <a href="https://www.axiomtheme.com/?utm_source=theme-footer&utm_medium=website&utm_campaign=referral">Axiom</a>
     </div>
   </div>
 </footer>
 
-<script src="/bundle.js?v=1594299915"></script>
+<script src="/bundle.js?v=1625364992"></script>
+
+
 </body>
 </html>

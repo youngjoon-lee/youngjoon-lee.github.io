@@ -9,9 +9,35 @@
   </author>
   <icon>https://axiom-example.netlify.app/image/brand/icon-1-1.png</icon>
   <logo>https://axiom-example.netlify.app/image/brand/icon-2-1.png</logo>
-  <updated>2020-07-09T13:05:15Z</updated>
+  <updated>2021-07-04T02:16:32Z</updated>
   <link rel="self" type="application/atom+xml" href="https://axiom-example.netlify.app/feed.atom" hreflang="en-us"/>
   <link rel="alternate" type="text/html" href="https://axiom-example.netlify.app/" hreflang="en-us"/>
+  <entry>
+    <title>What I Want to Make</title>
+    <author>
+      <name>Youngjoon Lee</name>
+      <uri>https://youngjoon-lee.github.com</uri>
+    </author>
+    <id>https://axiom-example.netlify.app/what-i-want-to-make/</id>
+    <updated>2021-07-04T01:00:00Z</updated>
+    <published>2021-07-04T01:00:00Z</published>
+    <content type="html"><![CDATA[<p>I'm a programmer. As many programmers, I love to make something works, even though someone has already made a similar stuff.
+Recently, I just realized that the longer my career as a programmer goes, the harder I decide what to make as a personal project.
+As my experience grows, I become know new techs, tools and paradigms.
+At that point, it is so easy to fall into lethargy, because it seems that almost everything has been already bulit by someone. And, everybody is already comfortable to use them.</p>
+<p>Probably, I could make something totally new that can change the world, for example, as Bitcoin.
+But, it is a totally different story change the world.
+It requires much more efforts than just making a software.
+We should convince people to change how they think.</p>
+<p>It will be super awesome if it is successful.
+But, for my personal project, I want to make something that convince people automatically.
+If I make something super simple but much better than others, and if that stuff is what people already used to use for their daily life or work, people will just say that it is awesome without any hesitation.</p>
+<p>So, I decide to start developing an IDE. I will post details soon, but it would be super fast, powerful and with the first-class Vim keybinding. Also, the first target platform will be Linux, because I love Linux which is free and powerful.
+I think Linux has long history and there are so many Linux distribution, but there are not that many comprehensive GUI softwares compared to other platforms such as macOS or Windows.
+So, I have even felt that I would like port some nice softwares from macOS to Linux.
+This project is not just a porting. I am going to build it from the scratch.</p>
+<p>Starting is better than doing nothing.</p>]]></content>
+  </entry>
   <entry>
     <title>Thought about Storage on Kubernetes</title>
     <author>
