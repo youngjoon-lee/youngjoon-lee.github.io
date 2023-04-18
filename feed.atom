@@ -9,9 +9,63 @@
   </author>
   <icon>https://oudwud.dev/image/brand/icon-1-1.png</icon>
   <logo>https://oudwud.dev/image/brand/icon-2-1.png</logo>
-  <updated>2023-04-18T12:06:51Z</updated>
+  <updated>2023-04-18T12:51:13Z</updated>
   <link rel="self" type="application/atom+xml" href="https://oudwud.dev/feed.atom" hreflang="en-us"/>
   <link rel="alternate" type="text/html" href="https://oudwud.dev/" hreflang="en-us"/>
+  <entry>
+    <title>Why prevote in Tendermint</title>
+    <author>
+      <name>Youngjoon Lee</name>
+      <uri>https://oudwud.dev</uri>
+    </author>
+    <id>https://oudwud.dev/2304182106-why-prevote-in-tendermint/</id>
+    <updated>2023-04-18T12:06:00Z</updated>
+    <published>2023-04-18T12:06:00Z</published>
+    <content type="html"><![CDATA[<p>Tendermint Byzantine Fault Tolerance (hereafter BFT) consensus algorithm has two stages of voting before committing a block to the state, unlike Raft consensus algorithm (that doesn't cover the Byzantine problem) has a single stage of preparation for committing a transaction.
+When I first met Tendermint, I was most curious why Tendermint has the two-stage voting (prevote-precommit).</p>
+<p>In <a href="https://atrium.lib.uoguelph.ca/xmlui/handle/10214/9769">Ethan Buchman 2016</a>, he mentioned as below:</p>
+<blockquote>
+<p>In asynchronous environments with Byzantine validators, a single stage
+of voting, where each validator casts only one vote, is not sufficient to ensure
+safety. In essence, because validators can act fraudulently, and because there
+are no guarantees on message delivery time, a rogue validator can co-ordinate
+some validators to commit a value while others, having not seen the commit,
+go to a new round, within which they commit a different value.
+<br>
+A single stage of voting allows validators to tell each other what they
+know about the proposal. But to tolerate Byzantine faults (which amounts,
+essentially to lies, fraud, deceit, etc.), they must also tell each other what
+they know about what other validators have professed to know about the
+proposal. In other words, a second stage ensures that enough validators
+witnessed the result of the first stage.</p>
+</blockquote>
+<p>That sounds reasonable, but I wanted to see a specific counterexample that explains why only precommit without prevote is not sufficient.</p>
+<p>Fortunately, I found a counterexample from a <a href="https://www.reddit.com/r/cosmosnetwork/comments/8zwais/comment/e2nyg92/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3">Reddit post</a>.
+Below, I am going to go into details on this counterexample.</p>
+<p>Let's assume that Tendermint has only single stage of voting (aka. precommit), and the network consists of the following validator nodes:</p>
+<ul>
+<li>100 validator nodes in the network
+<ul>
+<li>28 offline nodes (e.g. due to network partitioning)</li>
+<li>65 honest nodes</li>
+<li>1 honest node (aka. <code>H</code>)</li>
+<li>1 Byzantine node (aka. <code>B</code>)</li>
+</ul>
+</li>
+</ul>
+<p>Let's say the current round is <code>n</code>. A &quot;valid&quot; block is proposed by one of the validators.
+Then, all 66 (= 65 + 1) honest nodes broadcast a precommit for this valid block.
+But, let's imagine the case when the Byzantine node <code>B</code> sends <code>nil</code> to 65 honest nodes and itself, but a precommit to the honest node <code>H</code>.</p>
+<p>In this case, <code>H</code> has 67 precommits (<code>&gt; 100 * 2/3</code>) with its own vote. Then, <code>H</code> will commit the block.
+However, all other nodes (65 honest + <code>B</code>) move to the next round <code>n+1</code> because they have only 66 precommits (<code>&lt; 100 * 2/3</code>).</p>
+<p>This result is a breach of safety because the honest node <code>H</code> committed the block that all other honest nodes didn't commit.</p>
+<p>If Tendermint has the prevote-precommit mechanism, the above example can be resolved safely.
+Let's replace all precommits in the above example with prevotes.
+Then, <code>H</code> will broadcast a precommit to all other nodes instead of committing the block to its state,
+but it won't receive 2/3+ precommit from other nodes because all other nodes except <code>H</code> won't broadcast a precommit since they didn't receive 2/3+ prevotes.
+As a result, all nodes will move to the next round <code>n+1</code> without committing the block.
+Then, the consensus remains safe, even if any new block never be committed due to <code>B</code> in subsequent rounds.</p>]]></content>
+  </entry>
   <entry>
     <title>What&#39;s happened, happened</title>
     <author>
