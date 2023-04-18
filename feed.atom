@@ -9,7 +9,7 @@
   </author>
   <icon>https://oudwud.dev/image/brand/icon-1-1.png</icon>
   <logo>https://oudwud.dev/image/brand/icon-2-1.png</logo>
-  <updated>2023-04-01T06:35:39Z</updated>
+  <updated>2023-04-18T12:06:01Z</updated>
   <link rel="self" type="application/atom+xml" href="https://oudwud.dev/feed.atom" hreflang="en-us"/>
   <link rel="alternate" type="text/html" href="https://oudwud.dev/" hreflang="en-us"/>
   <entry>
@@ -18,7 +18,7 @@
       <name>Youngjoon Lee</name>
       <uri>https://oudwud.dev</uri>
     </author>
-    <id>https://oudwud.dev/whats-happened/</id>
+    <id>https://oudwud.dev/2303281600-whats-happened/</id>
     <updated>2023-03-28T07:00:00Z</updated>
     <published>2023-03-28T07:00:00Z</published>
     <content type="html"><![CDATA[<p>It's an expression of faith in the mechanics of the world. It's not an excuse for doing nothing.</p>]]></content>
@@ -29,7 +29,7 @@
       <name>Youngjoon Lee</name>
       <uri>https://oudwud.dev</uri>
     </author>
-    <id>https://oudwud.dev/bls-contribution/</id>
+    <id>https://oudwud.dev/2103301623-bls-contribution/</id>
     <updated>2021-03-30T07:23:00Z</updated>
     <published>2021-03-30T07:23:00Z</published>
     <content type="html"><![CDATA[<p><a href="https://github.com/kilic/bls12-381">bls12-381</a>: Support 32-bit architecture (<a href="https://github.com/kilic/bls12-381/pull/31">#31</a>)</p>]]></content>
@@ -40,7 +40,7 @@
       <name>Youngjoon Lee</name>
       <uri>https://oudwud.dev</uri>
     </author>
-    <id>https://oudwud.dev/thought_about_storage_on_k8s/</id>
+    <id>https://oudwud.dev/2007061657-thought_about_storage_on_k8s/</id>
     <updated>2020-07-06T07:57:28Z</updated>
     <published>2020-07-06T07:57:28Z</published>
     <content type="html"><![CDATA[<p>Kubernetes is revolutionizing the way applications are being developed and deployed.
@@ -84,7 +84,7 @@ It automates deployment, bootstrapping, configuration, scaling and rebalancing.<
       <name>Youngjoon Lee</name>
       <uri>https://oudwud.dev</uri>
     </author>
-    <id>https://oudwud.dev/hyperloglog/</id>
+    <id>https://oudwud.dev/2006281453-hyperloglog/</id>
     <updated>2020-06-28T05:53:42Z</updated>
     <published>2020-06-28T05:53:42Z</published>
     <content type="html"><![CDATA[<p>Given a stream of strings, let's think how to count the number of distinct strings (Cardinality).</p>
@@ -134,7 +134,7 @@ It automates deployment, bootstrapping, configuration, scaling and rebalancing.<
       <name>Youngjoon Lee</name>
       <uri>https://oudwud.dev</uri>
     </author>
-    <id>https://oudwud.dev/argo-release/</id>
+    <id>https://oudwud.dev/2006111140-argo-release/</id>
     <updated>2020-06-11T02:40:26Z</updated>
     <published>2020-06-11T02:40:26Z</published>
     <content type="html"><![CDATA[<p>My first open source <a href="https://github.com/argoproj/argo/pull/3014">contribution</a> (bugfix) to Argo.
