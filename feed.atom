@@ -9,9 +9,20 @@
   </author>
   <icon>https://oudwud.dev/image/brand/icon-1-1.png</icon>
   <logo>https://oudwud.dev/image/brand/icon-2-1.png</logo>
-  <updated>2023-05-02T04:39:53Z</updated>
+  <updated>2023-05-02T04:54:40Z</updated>
   <link rel="self" type="application/atom+xml" href="https://oudwud.dev/feed.atom" hreflang="en-us"/>
   <link rel="alternate" type="text/html" href="https://oudwud.dev/" hreflang="en-us"/>
+  <entry>
+    <title>OSS Contribution: AstroNvim/astrocommunity</title>
+    <author>
+      <name>Youngjoon Lee</name>
+      <uri>https://oudwud.dev</uri>
+    </author>
+    <id>https://oudwud.dev/2305021340-astronvim-contribution/</id>
+    <updated>2023-05-02T04:40:00Z</updated>
+    <published>2023-05-02T04:40:00Z</published>
+    <content type="html"><![CDATA[<p><a href="https://github.com/AstroNvim/astrocommunity">AstroNvim/astrocommunity</a>: feat(git): add openingh <a href="https://github.com/AstroNvim/astrocommunity/pull/178">#178</a></p>]]></content>
+  </entry>
   <entry>
     <title>Why prevote in Tendermint</title>
     <author>
