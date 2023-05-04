@@ -9,9 +9,88 @@
   </author>
   <icon>https://oudwud.dev/image/brand/icon-1-1.png</icon>
   <logo>https://oudwud.dev/image/brand/icon-2-1.png</logo>
-  <updated>2023-05-02T04:54:40Z</updated>
+  <updated>2023-05-04T15:47:21Z</updated>
   <link rel="self" type="application/atom+xml" href="https://oudwud.dev/feed.atom" hreflang="en-us"/>
   <link rel="alternate" type="text/html" href="https://oudwud.dev/" hreflang="en-us"/>
+  <entry>
+    <title>Exploring rust-libp2p</title>
+    <author>
+      <name>Youngjoon Lee</name>
+      <uri>https://oudwud.dev</uri>
+    </author>
+    <id>https://oudwud.dev/2305042345-exploring-rust-libp2p/</id>
+    <updated>2023-05-04T14:45:00Z</updated>
+    <published>2023-05-04T14:45:00Z</published>
+    <content type="html"><![CDATA[<h2 id="connectivity-tests">Connectivity Tests</h2>
+<p>After reading the <a href="https://connectivity.libp2p.io/">libp2p Connectivity</a> document, I've tested if 'dialing' works for each of the following scenarios using <a href="https://github.com/libp2p/rust-libp2p">rust-libp2p</a> v0.51.3.</p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Dialing</th>
+<th>Transports</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standalone -&gt; Standalone</td>
+<td>Successful</td>
+<td>TCP, WebSocket, WebRTC<sup><a href="#footnote-1">1)</a></sup></td>
+</tr>
+<tr>
+<td>WASM browser -&gt; Standalone</td>
+<td>Successful</td>
+<td>WebSocket<sup><a href="#footnote-2">2)</a></sup></td>
+</tr>
+<tr>
+<td>WASM browser &lt;- Standalone</td>
+<td>Failed<sup><a href="#footnote-3">3)</a></sup></td>
+<td>WebSocket</td>
+</tr>
+<tr>
+<td>WASM browser -&gt; WASM browser</td>
+<td>Failed<sup><a href="#footnote-3">3)</a></sup></td>
+<td>WebSocket</td>
+</tr>
+<tr>
+<td>JS browser<sup><a href="#footnote-4">4)</a></sup> -&gt; Standalone</td>
+<td>Successful</td>
+<td>WebRTC</td>
+</tr>
+<tr>
+<td>Private -&gt; (Relay<sup><a href="#footnote-5">5)</a></sup>) -&gt; Private</td>
+<td>Successful</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>Private<sup><a href="#footnote-6">6)</a></sup> -&gt; (Relay<sup><a href="#footnote-5">5)</a></sup>) -&gt; Private with <a href="https://docs.rs/libp2p/latest/libp2p/tutorials/hole_punching/index.html">Hole-punching</a></td>
+<td>Failed<sup><a href="#footnote-7">7)</a></sup></td>
+<td>TCP</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ul>
+<li><a name="footnote-1">1)</a> <a href="https://github.com/libp2p/rust-libp2p/blob/libp2p-v0.51.3/transports/webrtc/examples/listen_ping.rs">WebRTC example</a></li>
+<li><a name="footnote-2">2)</a> <a href="https://github.com/vincev/wasm-p2p-chat">vincev/wasm-p2p-chat</a> based on <a href="https://github.com/vincev/libp2p-websys-transport">vincev/libp2p-websys-transport</a> that <a href="https://github.com/libp2p/rust-libp2p/issues/3611">will be included in the rust-libp2p offically</a></li>
+<li><a name="footnote-3">3)</a> <a href="https://docs.libp2p.io/concepts/transports/webrtc/#webrtc-private-to-private">Browser nodes cannot listen for incoming conns.</a></li>
+<li><a name="footnote-4">4)</a> <a href="https://github.com/libp2p/js-libp2p-webrtc/tree/main/examples/browser-to-server">js-libp2p-webrtc browser-to-server example</a></li>
+<li><a name="footnote-5">5)</a> <a href="https://github.com/libp2p/rust-libp2p/blob/libp2p-v0.51.3/examples/relay-server">Relay-server example</a></li>
+<li><a name="footnote-6">6)</a> <a href="https://github.com/libp2p/rust-libp2p/blob/libp2p-v0.51.3/examples/dcutr">dCUtR example</a></li>
+<li><a name="footnote-7">7)</a> It seems that the hole-punching is <a href="https://github.com/libp2p/rust-libp2p/discussions/3458#discussioncomment-5015353">not always successful</a>. Used AWS for relayer and listener (in private subnet with NAT), and my laptop for dialer.</li>
+</ul>
+</blockquote>
+<h2 id="wasm-limitations">WASM Limitations</h2>
+<p>I've found that the following features of rust-libp2p cannot be enabled for WASM.</p>
+<pre tabindex="0"><code>gossipsub, mdns, dns, tokio
+</code></pre><p>If WASM codes import those features, the following error occurs:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="n">error</span><span class="p">[</span><span class="n">E0432</span><span class="p">]</span>: <span class="nc">unresolved</span><span class="w"> </span><span class="n">import</span><span class="w"> </span><span class="err">`</span><span class="n">libp2p</span>::<span class="n">gossipsub</span><span class="err">`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">-</span>-&gt; <span class="nc">core</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">p2p</span><span class="p">.</span><span class="n">rs</span>:<span class="mi">20</span>:<span class="mi">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">|</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">20</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="n">gossipsub</span><span class="p">,</span><span class="w"> </span><span class="n">identity</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">|</span><span class="w">     </span><span class="o">^^^^^^^^^</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="err">`</span><span class="n">gossipsub</span><span class="err">`</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">root</span><span class="w">
+</span></span></span></code></pre></div>]]></content>
+  </entry>
   <entry>
     <title>OSS Contribution: AstroNvim/astrocommunity</title>
     <author>
