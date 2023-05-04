@@ -9,7 +9,7 @@
   </author>
   <icon>https://oudwud.dev/image/brand/icon-1-1.png</icon>
   <logo>https://oudwud.dev/image/brand/icon-2-1.png</logo>
-  <updated>2023-05-04T16:19:11Z</updated>
+  <updated>2023-05-04T16:29:30Z</updated>
   <link rel="self" type="application/atom+xml" href="https://oudwud.dev/feed.atom" hreflang="en-us"/>
   <link rel="alternate" type="text/html" href="https://oudwud.dev/" hreflang="en-us"/>
   <entry>
@@ -22,6 +22,7 @@
     <updated>2023-05-04T14:45:00Z</updated>
     <published>2023-05-04T14:45:00Z</published>
     <content type="html"><![CDATA[<h2 id="connectivity-tests">Connectivity Tests</h2>
+<p>In <a href="https://libp2p.io">libp2p.io</a>, <a href="https://libp2p.io/implementations/">the current state of Transport implementations</a> in each programming language already written. But, I’ve seen there have been so many changes in rust-libp2p, as described in the <a href="https://libp2p.io/2023-01-12-rust-libp2p-in-2022/">rust-libp2p in 2022</a> blog post.</p>
 <p>After reading the <a href="https://connectivity.libp2p.io/">libp2p Connectivity</a> document, I've tested if 'dialing' works for each of the following scenarios using <a href="https://github.com/libp2p/rust-libp2p">rust-libp2p</a> v0.51.3.</p>
 <table>
 <thead>
