@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<style type=text/css>body{font-family:monospace;}</style>
+	<title>Thought about Storage on Kubernetes</title>
+	
+	
+	<link rel="stylesheet" href="/css/style.css">
+	
+</head>
+<body>
+	<header>
+	===================<br>
+	== <a href="">Youngjoon Lee</a> ==<br>
+	===================
+	<div style="float: right;"></div><br>
+	<p>
+	<nav>
+			<a href="/"><b>Start</b></a>.
+			
+			
+			<a href="/posts/"><b>Posts</b></a>.
+			
+			<a href="/categories/"><b>Categories</b></a>.
+			
+			<a href="/tags/"><b>Tags</b></a>.
+			
+	</nav>
+	</p>
+	
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-144368893-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</header>
+
+	
+	<main>
+		<article>
+			<h1>Thought about Storage on Kubernetes</h1>
+			<b><time>06.07.2020 16:57</time></b>
+		       
+
+			<div>
+				<p>Kubernetes is revolutionizing the way applications are being developed and deployed.
+Now, developers can focus on implementing the application itself without worrying about
+the underlying infrastructure and some of distributed system concepts.</p>
+<p>However, Kubernetes doesn&rsquo;t support storing state, even though most of applications are stateful.</p>
+<p>On Kubernetes, containers can being created and destroyed. They are dynamic.
+But, persistent storages cannot be dynamic as normal Pods.</p>
+<p>Many SW teams have been using distributed storage solutions provided by cloud providers, such as
+AWS or GCP. It makes developers deploy their containers to another cloud provider or any other environments.</p>
+<p>I was curious which the cloud-native storage solutions have being discussed.</p>
+<h3 id="native-kubernetes--storage">Native Kubernetes &amp; Storage</h3>
+<p>On Kubernetes, we can use PV and PVC. In static provisioning, admin should define PVCs in advance,
+so that storages can be mounted to a particular node before executing Pods.
+It doesn&rsquo;t meet the philosophy of Kubernetes that allocates resources (CPU/Mem) dynamically.</p>
+<p>In dynamic provisioning by Storage Class, we can create multiple profiles of storage, just like templates.
+When a developer makes a PVC, one of these templates is created at the time of the request, and attached to the Pod.
+But, honestly, I don&rsquo;t understand yet how it works.</p>
+<h3 id="csi-container-storage-interface">CSI (Container Storage Interface)</h3>
+<p>CSI was created by CNCF Storage Working Group. It defines a standard container storage interface which can enable
+storage drivers to work on any container orchestrator.</p>
+<p>CSI spec have already been included into Kubernetes. There are already many driver plugins.
+Developers can access storage exposed by CSI-compatible volume driver.</p>
+<p>With CSI, storage can be treated as another workload to be containerized and deployed on a Kubernetes cluster.</p>
+<h3 id="open-source-projects">Open-source Projects</h3>
+<p>Ceph is one of popular distributed storages. Ceph has been adapted into the cloud-native environment.
+There are many ways you can deploy a Ceph cluster, such as with Ansible.
+Using CSI and PVCs, we can deploy a Ceph cluster and have an interface into it from Kubernetes cluster.</p>
+<p>Also, Rook is an open-source project that converge Kubernetes and Ceph.
+Rook is a cloud-native orchestrator which extends Kubernetes.
+It allows putting Ceph into containers, and provides cluster management logic for running Ceph on Kubernetes.
+It automates deployment, bootstrapping, configuration, scaling and rebalancing.</p>
+<p>Rook doesn&rsquo;t have its own persistent state. It&rsquo;s truly built according to the principle of Kubernetes.</p>
+<h3 id="next">Next</h3>
+<p>Let&rsquo;s see how Rook deals with Ceph on Kubernetes, and how it will deal with other distributed storages.</p>
+<p>As a developer of distributed storages, is Rook the best option for deploying storages on Kubernetes?</p>
+
+			</div>
+		</article>
+	</main>
+<aside>
+	<div>
+		<div>
+			<h3>LATEST POSTS</h3>
+		</div>
+		<div>
+			<ul>
+				
+				<li><a href="/posts/thought_about_storage_on_k8s/">Thought about Storage on Kubernetes</a></li>
+				
+				<li><a href="/posts/hyperloglog/">HyperLogLog</a></li>
+				
+				<li><a href="/posts/argo-release/">My first open source contribution was just released.</a></li>
+				
+				<li><a href="/posts/4-month-work-from-home/">4-month Working From Home in Germany and Korea</a></li>
+				
+			</ul>
+		</div>
+	</div>
+</aside>
+
+
+	<footer>
+	<p>&copy; 2020 <a href=""><b>Youngjoon Lee</b></a>.
+	<a href="https://github.com/youngjoon-lee"><b>Github</b></a>.
+	<a href="https://www.linkedin.com/in/youngjoon-lee-11ba7b72/"><b>Linkedin</b></a>.
+	<a href="/imprint"><b>Imprint</b></a>.
+	</p>
+</footer>
+
+</body>
+</html>
