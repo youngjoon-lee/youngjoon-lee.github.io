@@ -1,4 +1,3 @@
 User-agent: *
 Disallow:
-
-Sitemap: https://axiom-example.netlify.app/sitemap.xml
+Sitemap: https://oudwud.dev/sitemap.xml
