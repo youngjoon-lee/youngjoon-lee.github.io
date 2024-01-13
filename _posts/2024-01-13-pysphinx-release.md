@@ -13,5 +13,5 @@ The initial version v0.0.1 provides most of basic functionalities:
 - Deconstructing a Sphinx packet
 
 The v0.0.1 doesn't support the following features yet:
-- Specifying delays and SURB identifiers when constructing Sphinx packets: https://github.com/youngjoon-lee/pysphinx/issues/2
-- Payload encryption: https://github.com/youngjoon-lee/pysphinx/issues/4
+- Specifying delays and SURB identifiers when constructing Sphinx packets: [https://github.com/youngjoon-lee/pysphinx/issues/2](https://github.com/youngjoon-lee/pysphinx/issues/2)
+- Payload encryption: [https://github.com/youngjoon-lee/pysphinx/issues/4](https://github.com/youngjoon-lee/pysphinx/issues/4)
