@@ -82,4 +82,4 @@ The `T` is determined to make the size of `padded_payload` 1024 bytes.
 
 If `payload` is too large to make `padded_payload` 1024 bytes, the algorithm fails.
 
-The `padded_payload` is layered-encrypted by Lioness with ChaCha20 and Blake2b using a payload key of each $m1, m2$ and $m_3$.
+The `padded_payload` is layered-encrypted by Lioness with ChaCha20 and Blake2b using a payload key of each $m_1, m_2$ and $m_3$.
